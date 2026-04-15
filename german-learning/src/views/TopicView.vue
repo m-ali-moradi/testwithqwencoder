@@ -91,17 +91,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { useGrammarStore } from '../stores/grammar';
 import ExerciseComponent from '../components/exercises/ExerciseComponent.vue';
+import type { GrammarTopic } from '../types';
 
+const route = useRoute();
 const grammarStore = useGrammarStore();
 
 const props = defineProps<{
   topicId: string;
 }>();
 
-const topic = computed(() => grammarStore.getTopicById(props.topicId));
+const topic = computed(() => grammarStore.getTopicBySlug(props.topicId));
 const activeTab = ref<'learn' | 'examples' | 'exercises'>('learn');
 
 const currentExerciseIndex = ref(0);
@@ -113,29 +116,11 @@ const currentExercise = computed(() => {
   return topic.value.exercises[currentExerciseIndex.value];
 });
 
-// Simple markdown-like rendering
-const renderedContent = computed(() => {
-  if (!topic.value) return '';
-  let content = topic.value.content;
-  
-  // Convert headers
-  content = content.replace(/## (.*?)(?=\n|$)/g, '<h2>$1</h2>');
-  content = content.replace(/### (.*?)(?=\n|$)/g, '<h3>$1</h3>');
-  
-  // Convert bold
-  content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  
-  // Convert lists
-  content = content.replace(/^\- (.*?)(?=\n|$)/gm, '<li>$1</li>');
-  content = content.replace(/<li>(.*?)<\/li>/gs, '<ul>$&</ul>');
-  
-  // Convert tables (simplified)
-  content = content.replace(/\|(.+?)\|/g, '<tr>$1</tr>');
-  
-  // Convert line breaks to paragraphs
-  content = content.split('\n\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
-  
-  return content;
+// Increment views when topic is loaded
+onMounted(() => {
+  if (topic.value) {
+    grammarStore.incrementTopicViews(topic.value.id);
+  }
 });
 
 function handleAnswer(result: { correct: boolean; exerciseId: string }) {
@@ -144,7 +129,7 @@ function handleAnswer(result: { correct: boolean; exerciseId: string }) {
   }
   
   grammarStore.recordExerciseCompletion(
-    props.topicId,
+    topic.value!.id,
     result.exerciseId,
     result.correct
   );
@@ -170,6 +155,11 @@ watch(() => props.topicId, () => {
   score.value = 0;
   exerciseCompleted.value = false;
   activeTab.value = 'learn';
+  
+  // Increment views for new topic
+  if (topic.value) {
+    grammarStore.incrementTopicViews(topic.value.id);
+  }
 });
 </script>
 
