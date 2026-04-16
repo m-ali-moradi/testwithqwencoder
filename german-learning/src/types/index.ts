@@ -16,6 +16,32 @@ export interface GrammarTip {
   content: string;
 }
 
+export interface VocabularyWord {
+  id: string;
+  german: string;
+  english: string;
+  article?: string; // der, die, das
+  plural?: string;
+  example?: string;
+  audioUrl?: string; // Placeholder for future audio implementation
+  pronunciation?: string;
+  tags: string[];
+}
+
+export interface VocabularyCategory {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+  icon: string; // Emoji or icon class
+  color: string; // Tailwind color class base (e.g., 'blue', 'green')
+  words: VocabularyWord[];
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: string[];
+}
+
 export interface GrammarTopic {
   id: string;
   slug: string; // For SEO-friendly URLs

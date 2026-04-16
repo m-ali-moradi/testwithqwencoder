@@ -2,12 +2,13 @@
   <div class="topic-card" :class="`level-${topic.level.toLowerCase()}`">
     <div class="card-header">
       <span class="level-badge">{{ topic.level }}</span>
+      <span class="category-tag">{{ topic.category }}</span>
       <h3 class="topic-title">{{ topic.title }}</h3>
     </div>
-    <p class="topic-description">{{ topic.description }}</p>
+    <p class="topic-description">{{ topic.shortDescription }}</p>
     <div class="card-footer">
       <span class="exercise-count">{{ topic.exercises.length }} exercises</span>
-      <router-link :to="`/grammar/${topic.id}`" class="start-btn">
+      <router-link :to="`/grammar/${topic.slug}`" class="start-btn">
         Start Learning →
       </router-link>
     </div>
@@ -62,6 +63,7 @@ defineProps<{
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .level-badge {
@@ -71,6 +73,17 @@ defineProps<{
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.category-tag {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .level-a1 .level-badge {
@@ -99,6 +112,7 @@ defineProps<{
   color: #1a1a2e;
   margin: 0;
   flex: 1;
+  min-width: 200px;
 }
 
 .topic-description {
@@ -141,6 +155,10 @@ defineProps<{
 
   .topic-title {
     font-size: 1rem;
+  }
+  
+  .card-header {
+    gap: 0.5rem;
   }
 }
 </style>

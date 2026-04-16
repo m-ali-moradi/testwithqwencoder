@@ -106,26 +106,44 @@ function getTopicCount(level: string): number {
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
-  max-width: 600px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .cta-button {
   display: inline-block;
-  background: linear-gradient(135deg, #4ade80 0%, #3b82f6 100%);
   color: white;
   text-decoration: none;
-  padding: 1rem 2.5rem;
+  padding: 1rem 2rem;
   border-radius: 12px;
   font-size: 1.125rem;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
+.cta-button.primary {
+  background: linear-gradient(135deg, #4ade80 0%, #3b82f6 100%);
+}
+
+.cta-button.secondary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 .cta-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(74, 222, 128, 0.3);
+}
+
+.cta-button.secondary:hover {
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
 }
 
 .features-section {
@@ -252,6 +270,33 @@ function getTopicCount(level: string): number {
   color: #475569;
 }
 
+.trending-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.trending-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.view-all-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-all-link:hover {
+  color: #5568d3;
+  transform: translateX(4px);
+}
+
 .topics-preview {
   background: white;
   padding: 2rem;
@@ -261,7 +306,7 @@ function getTopicCount(level: string): number {
 
 .topics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 

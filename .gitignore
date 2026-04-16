@@ -7,6 +7,18 @@ dist/
 build/
 target/
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-selfcheck.json
+
 # Logs
 *.log
 
@@ -15,30 +27,26 @@ target/
 .env.local
 .env.*
 
-# IDE files
+# IDE
 .vscode/
 .idea/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Temporary files
-*.tmp
 *.swp
 *.swo
 
-# OS generated files
+# OS
 .DS_Store
 Thumbs.db
 
-# Coverage reports
+# Coverage
 coverage/
 htmlcov/
 .coverage
 
-# TypeScript/JavaScript build outputs
+# TypeScript/JavaScript
 *.tsbuildinfo
+.nyc_output
+
+# Temporary files
+*.tmp
+*.temp
 ```
