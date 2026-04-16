@@ -13,9 +13,20 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/GrammarView.vue')
   },
   {
-    path: '/grammar/:topicId',
+    path: '/grammar/:topicSlug',
     name: 'GrammarTopic',
     component: () => import('../views/TopicView.vue'),
+    props: true
+  },
+  {
+    path: '/vocabulary',
+    name: 'Vocabulary',
+    component: () => import('../views/VocabularyView.vue')
+  },
+  {
+    path: '/vocabulary/:categorySlug',
+    name: 'VocabularyCategory',
+    component: () => import('../views/VocabularyCategoryView.vue'),
     props: true
   },
   {
